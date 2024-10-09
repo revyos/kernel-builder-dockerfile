@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      ubuntu: mantic # noble
+      ubuntu: noble
       image_name: ghcr.io/revyos
     strategy:
       fail-fast: false
