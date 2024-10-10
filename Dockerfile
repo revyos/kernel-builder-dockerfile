@@ -12,7 +12,7 @@ RUN apt update && \
     apt install -y gdisk dosfstools build-essential \
     libncurses-dev gawk flex bison openssl libssl-dev tree \
     dkms libelf-dev libudev-dev libpci-dev libiberty-dev autoconf device-tree-compiler \
-    devscripts pahole bc rsync bash wget cpio sudo python-is-python3 debhelper ccache asciidoc
+    devscripts pahole bc rsync bash wget cpio sudo python-is-python3 debhelper ccache asciidoc python3-dev
 
 RUN apt install -y nodejs
 
