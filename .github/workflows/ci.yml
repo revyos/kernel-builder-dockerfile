@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      ubuntu: noble
+      ubuntu: plucky
       image_name: ghcr.io/revyos
     strategy:
       fail-fast: false
@@ -52,7 +52,7 @@ jobs:
 
       - name: Build and push
         id: build
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           push: true
@@ -60,4 +60,4 @@ jobs:
           build-args: |
             arch_name=${{ matrix.arch_name }}
           tags: |
-            ${{ env.image_name }}/revyos-kernel-builder:${{ matrix.arch_name }}-${{ env.BUILD_DATE }}
+            ${{ env.image_name }}/revyos-kernel-builder:${{ matrix.arch_name }}-${{ env.BUILD_DATE }}-${{ env.ubuntu }}
