@@ -19,14 +19,12 @@ RUN apt install -y nodejs
 
 RUN if [ "$(uname -m)" = "x86_64" ]; \
     then apt install -y \
-    g++-10-riscv64-linux-gnu gcc-10-riscv64-linux-gnu \
     g++-11-riscv64-linux-gnu gcc-11-riscv64-linux-gnu \
     g++-12-riscv64-linux-gnu gcc-12-riscv64-linux-gnu \
     g++-13-riscv64-linux-gnu gcc-13-riscv64-linux-gnu \
     g++-riscv64-linux-gnu gcc-riscv64-linux-gnu; \
     elif [ "$(uname -m)" = "riscv64" ]; \
     then apt install -y \
-    g++-10 gcc-10 \
     g++-11 gcc-11 \
     g++-12 gcc-12 \
     g++-13 gcc-13 \
