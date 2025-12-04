@@ -1,6 +1,6 @@
 FROM scratch
 
-LABEL org.opencontainers.image.authors="rabenda.cn@gmail.com"
+LABEL org.opencontainers.image.authors="gaohan@iscas.ac.cn"
 
 ARG arch_name
 
