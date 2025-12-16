@@ -1,10 +1,8 @@
-FROM scratch
+ARG debian_version
+
+FROM debian:${debian_version}
 
 LABEL org.opencontainers.image.authors="gaohan@iscas.ac.cn"
-
-ARG arch_name
-
-ADD ${arch_name}.tar.xz /
 
 ENV DEBIAN_FRONTEND noninteractive
 
