@@ -10,32 +10,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      ubuntu: plucky
+      debian_version: trixie
       image_name: ghcr.io/revyos
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - platform: linux/amd64
-            arch_name: amd64
-          - platform: linux/riscv64
-            arch_name: riscv64
-
     steps:
       - name: Prepare
         run: |
-          platform=${{ matrix.platform }}
-          echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV
           build_date=$(date "+%Y.%m.%d")
           echo "BUILD_DATE=${build_date}" >> $GITHUB_ENV
 
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Download Rootfs
-        run: |
-          wget https://cloud-images.ubuntu.com/${ubuntu}/current/${ubuntu}-server-cloudimg-${{ matrix.arch_name }}-root.tar.xz
-          mv ${ubuntu}-server-cloudimg-${{ matrix.arch_name }}-root.tar.xz ${{ matrix.arch_name }}.tar.xz
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -56,8 +40,8 @@ jobs:
         with:
           context: .
           push: true
-          platforms: ${{ matrix.platform }}
+          platforms: linux/amd64,linux/riscv64
           build-args: |
-            arch_name=${{ matrix.arch_name }}
+            debian_version=${{ env.debian_version }}
           tags: |
-            ${{ env.image_name }}/revyos-kernel-builder:${{ matrix.arch_name }}-${{ env.BUILD_DATE }}-${{ env.ubuntu }}
+            ${{ env.image_name }}/revyos-kernel-builder:debian-${{ env.debian_version }}-${{ env.BUILD_DATE }}
